@@ -1,0 +1,117 @@
+body {
+    background-image: linear-gradient(92.88deg, #5983e4 9.16%, #355fae 43.89%, #2146b4 64.72%);
+    margin: 0;
+    padding: 0;
+}
+
+.nav {
+    height: 70px;
+    width: 100%;
+    position: relative;
+    z-index: 10;
+    font-size: 2rem;
+  }
+  
+  .nav > .nav-header {
+    display: inline;
+  }
+
+  .nav p {
+    color: white;
+    padding-left: 20px;
+  }
+  
+  .nav > .nav-header > .nav-title {
+    display: inline-block;
+    font-size: 2.5rem;
+  }
+  
+  .nav > .nav-btn {
+    display: none;
+  }
+  
+  .nav > .nav-links {
+    display: inline;
+    float: right;
+    font-size: 2rem;
+  }
+  
+  .nav > .nav-links > a {
+    display: inline-block;
+    padding: 45px 20px 20px 10px;
+    text-decoration: none;
+    color: white;
+  }
+  
+  .nav > .nav-links > a:hover {
+    color: white;
+  }
+  
+  .nav > #nav-check {
+    display: none;
+  }
+  
+  @media (max-width:600px) {
+    .nav > .nav-btn {
+      display: inline-block;
+      position: absolute;
+      right: 0px;
+      top: 30px;
+    }
+    .nav > .nav-btn > label {
+      display: inline-block;
+      width: 50px;
+      height: 50px;
+      padding: 13px;
+    }
+    .nav > .nav-btn > label > span {
+      display: block;
+      width: 25px;
+      height: 10px;
+      border-top: 2px solid #eee;
+    }
+    .nav > .nav-links {
+      position: absolute;
+      display: block;
+      width: 100%;
+      background-image: linear-gradient(92.88deg, #5983e4 9.16%, #355fae 43.89%, #2146b4 64.72%);
+      height: 0px;
+      transition: all 0.3s ease-in;
+      overflow-y: hidden;
+      top: 100px;
+      left: 0px;
+    }
+    .nav > .nav-links > a {
+      display: block;
+      width: 100%;
+    }
+    .nav > #nav-check:not(:checked) ~ .nav-links {
+      height: 0px;
+    }
+    .nav > #nav-check:checked ~ .nav-links {
+      height: calc(100vh - 50px);
+      overflow-y: auto;
+    }
+  }
+  
+  #logo {
+    width: 200px;
+  }
+
+.guessArea {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    padding-top: 3rem;
+
+}
+
+.guessArea img {
+    width: 300px;
+    border: 2px solid black;
+    box-shadow: 2px 2px 2px 2px;
+}
+
