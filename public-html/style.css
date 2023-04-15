@@ -7,9 +7,12 @@ body {
 .nav {
     height: 70px;
     width: 100%;
-    position: relative;
+    position: sticky;
+    top: 0;
     z-index: 10;
     font-size: 2rem;
+    background-color: rgb(0, 0, 0,0.5);
+    padding-bottom: 1rem;
   }
   
   .nav > .nav-header {
@@ -23,7 +26,7 @@ body {
   
   .nav > .nav-header > .nav-title {
     display: inline-block;
-    font-size: 2.5rem;
+    font-size: 2rem;
   }
   
   .nav > .nav-btn {
@@ -33,7 +36,7 @@ body {
   .nav > .nav-links {
     display: inline;
     float: right;
-    font-size: 2rem;
+    font-size: 1.5rem;
   }
   
   .nav > .nav-links > a {
@@ -97,6 +100,25 @@ body {
   #logo {
     width: 200px;
   }
+
+.textContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+.textContainer h1{
+  font-size: 2.5rem;
+}
+.textContainer h2{
+  font-size: 2rem;
+}
+.textContainer p{
+  font-size: 1.5rem;
+}
 
 .guessArea {
     width: 100%;
