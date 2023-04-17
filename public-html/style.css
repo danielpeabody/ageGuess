@@ -195,3 +195,35 @@ body {
   box-shadow: #13cf4f 0 0 0 5px, transparent 0 0 0 0;
 }
 
+
+/* Define styles for the table */
+.leaderboard {
+  text-align: center;
+}
+table {
+  border-collapse: collapse;
+  margin: auto;
+  width: 80%;
+  max-width: 800px;
+  font-family: Arial, sans-serif;
+  border: 5px solid black;
+  margin-bottom: 3rem;
+}
+th, td {
+  padding: 10px;
+  text-align: left;
+}
+th {
+  background-color: white;
+  color: black;
+}
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+tr:nth-child(odd) {
+  background-color: black;
+  color: white;
+}
+tr:hover {
+  background-color: green;
+}
