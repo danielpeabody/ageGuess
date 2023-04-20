@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ageGuess</title>
     <link rel="stylesheet" href="style.css">
+    <script src="celebgame.js"></script>
 
 </head>
 <body>
@@ -41,8 +42,8 @@
 
         <div class="guessArea">
             <button type="submit" class="button">Start Guessing</button>
-            <img src="images\tomcruise.jpg" alt="">
-            <input type="text" class="guess" placeholder="Guess Age">
+            <img src="" alt="" id="celebPic">
+            <input type="text" class="guess" id="guessInput" placeholder="Guess Age" onkeydown="checkGuess(event)">
         </div>
 
         <div class="leaderboard">

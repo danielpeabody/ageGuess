@@ -1,13 +1,7 @@
-@font-face {
-  font-family: 'Inter';
-  src: url('static/Inter-ExtraBold.ttf') format('truetype');
-}
-
 body {
     background-image: linear-gradient(92.88deg, #5983e4 9.16%, #355fae 43.89%, #2146b4 64.72%);
     margin: 0;
     padding: 0;
-    font-family: 'Inter', sans-serif;
 }
 
 .nav {
@@ -108,50 +102,43 @@ body {
   }
 
 
-.content {
+  .gamemodes {
     text-align: center;
-    color: white;
-}
-
-.content h1 {
-    font-size: 4rem;
-}
-
-/* CSS */
-.button {
-    align-items: center;
-    background-color: #fff;
-    border-radius: 12px;
-    box-shadow: transparent 0 0 0 3px,rgba(18, 18, 18, .1) 0 6px 20px;
-    box-sizing: border-box;
-    color: #121212;
-    cursor: pointer;
-    display: inline-flex;
-    flex: 1 1 auto;
-    font-family: Inter,sans-serif;
-    font-size: 1.2rem;
-    font-weight: 700;
-    justify-content: center;
-    line-height: 1;
-    margin: 1rem;
-    outline: none;
-    padding: 1rem 1.2rem;
-    text-align: center;
-    text-decoration: none;
-    transition: box-shadow .2s,-webkit-box-shadow .2s;
-    white-space: nowrap;
-    border: 0;
-    user-select: none;
-    -webkit-user-select: none;
-    touch-action: manipulation;
   }
   
-  .button:hover {
-    box-shadow: #13cf4f 0 0 0 5px, transparent 0 0 0 0;
+  .gamemodes h2 {
+    font-size: 4rem;
+    font-weight: bold;
+    margin: 3rem;
+    text-decoration: underline;
+    color: white;
   }
+  .gamemodes__grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    width: 90%;
+    margin-inline: auto;
+  }
+  
+  .gamemodes__griditem {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 320px;
+    border: 2px solid black;
+    border-radius: 2%;
+    background-color: rgb(0, 0, 0,0.4);
 
-#hero {
-    margin: 0;
-    padding: 0;
-    font-size: 10rem;
-}
+  }
+  
+  .gamemodes__griditem a {
+    text-decoration: none;
+    font-size: 4rem;
+    color: white;
+  }
+  
+  .gamemodes__griditem:hover {
+    filter: drop-shadow(1px 1px 5px var(--primary-color));
+  }
