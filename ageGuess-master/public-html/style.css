@@ -227,3 +227,29 @@ tr:nth-child(odd) {
 tr:hover {
   background-color: green;
 }
+
+.incorrect {
+  animation: flash 1s;
+}
+
+@keyframes flash {
+  0% {
+    background-color: red;
+  }
+  100% {
+    background-color: red;
+  }
+}
+
+.correct {
+  animation: gflash 1s;
+}
+
+@keyframes gflash {
+  0% {
+    background-color: green;
+  }
+  100% {
+    background-color: green;
+  }
+}

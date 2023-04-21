@@ -10,7 +10,7 @@ window.onload = function(){
     function checkGuess(event){
         if(event.keyCode == 13){
             let guess = document.getElementById('guessInput').value;
-            let filename = document.getElementById('celebPic').src;
+            let filename = document.getElementById('celebPic').alt;
             let data = {filename: filename, guess: guess};
             fetch('/check/guess', {
                 method: 'POST',
@@ -21,13 +21,22 @@ window.onload = function(){
             })
             .then(function(response){
                 console.log(response);
-                response.json().then(function(data){
-                    if(data.correct){
-                        alert("Correct");
+                response.text().then(function(data){
+                    if(data == "correct"){
+                        document.getElementById('guessInput').classList.add('correct');
+                        setTimeout(function(){
+                            document.getElementById('guessInput').classList.remove('correct');
+                        }, 1000); 
                         getNewImage();
+                        document.getElementById('guessInput').value = "";
                     }
                     else{
-                        alert("Incorrect");
+                        console.log("incorrect");
+                        document.getElementById('guessInput').classList.add('incorrect');
+                        setTimeout(function(){
+                            document.getElementById('guessInput').classList.remove('incorrect');
+                        }, 1000); // Remove the class after 1 second
+                        document.getElementById('guessInput').value = "";
                     }
                 });
             });
@@ -38,10 +47,14 @@ window.onload = function(){
     function getNewImage(){
         fetch('/get/image')
         .then(function(response){
-            response.arrayBuffer().then(function(buffer){
-                const blob = new Blob([buffer], { type: 'image/jpeg' });
-                const url = URL.createObjectURL(blob);
-                document.getElementById('celebPic').src = url;
+            response.json().then(function(data){
+                // const blob = new Blob([data.pic], { type: 'image/jpeg' });
+                // const url = URL.createObjectURL(blob);
+                const dataUrl = `data:image/jpeg;base64,${data.pic.toString('base64')}`;
+                document.getElementById('celebPic').src = dataUrl;
+                document.getElementById('celebPic').alt = data.filename;
+                document.getElementById('celebName').innerText = data.name.split('_').join(' ');
+                document.getElementById('dateTaken').innerText = "This photo was taken in "+ data.dateTaken;
             });
         });
     }

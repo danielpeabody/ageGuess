@@ -13,7 +13,7 @@ const port = 3000;
 
 mongoose.set('strictQuery', false);
 
-const mongoDB ='mongodb+srv://doadmin:7wIg2qn46D31z8r9@finalproj-beb76a02.mongo.ondigitalocean.com/admin?tls=true&authSource=admin';
+const mongoDB ='mongodb+srv://doadmin:8IVM69G1KCtq4325@finalproj-beb76a02.mongo.ondigitalocean.com/admin?tls=true&authSource=admin&replicaSet=finalproj';
 
 main().catch(err => console.log(err));
 async function main() {
@@ -92,13 +92,22 @@ function createCookie(username){
 /*This function gets a random image from the mongoDB database collection called
 Images. Then it send the image back to the client*/
 app.get('/get/image', function(req, res){
-  let image = celebImage.find({}).exec();
+  let image = celebImage.aggregate([{ $sample: { size: 1 } }]);
   image.then(function(docs){
-    length = docs.length;
-    let rand = Math.floor(Math.random() * length);
-    console.log(docs[rand].person);
-    res.set('Content-Type', 'application/octet-stream');
-    res.end(docs[rand].data);
+    console.log(docs[0].birthYear, docs[0].datePhotoTaken);
+    const data = {
+      filename: docs[0].filename,
+      pic: docs[0].data,
+      name: docs[0].person,
+      dateTaken: docs[0].datePhotoTaken,
+    }
+
+    res.end(JSON.stringify(data));
+    // length = docs.length;
+    // let rand = Math.floor(Math.random() * length);
+    // console.log(docs[rand].person);
+    // res.set('Content-Type', 'application/octet-stream');
+    // res.end(docs[rand].data);
   });
 })
 
@@ -109,7 +118,8 @@ app.post('/check/guess', function(req, res){
   let guess = req.body.guess;
   let image = celebImage.findOne({filename: filename}).exec();
   image.then(function(doc){
-    if(guess == doc.age){
+    const age = doc.datePhotoTaken - doc.birthYear;
+    if(parseInt(guess) == age){
       res.end("correct");
     }
     else{
