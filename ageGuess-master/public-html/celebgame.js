@@ -29,6 +29,8 @@ window.onload = function(){
                         }, 1000); 
                         getNewImage();
                         document.getElementById('guessInput').value = "";
+                        updateScore();
+                        document.getElementById('curScore').innerText = "Current Score: " + curScorev;
                     }
                     else{
                         console.log("incorrect");
@@ -37,6 +39,7 @@ window.onload = function(){
                             document.getElementById('guessInput').classList.remove('incorrect');
                         }, 1000); // Remove the class after 1 second
                         document.getElementById('guessInput').value = "";
+                        curScorev = 0;
                     }
                 });
             });
@@ -59,13 +62,8 @@ window.onload = function(){
         });
     }
 
-    
+    const curScorev = 0;    
     function updateScore(){
-        fetch('/get/score')
-        .then(function(response){
-            response.json().then(function(data){
-                document.getElementById('score').innerHTML = data.score;
-            });
-        });
+        curScorev += 1;
     }
 
