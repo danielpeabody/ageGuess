@@ -20,6 +20,12 @@ async function main() {
   await mongoose.connect(mongoDB);
 }
 
+const userSchema = new mongoose.Schema({
+    username: String,
+    password: String,
+    topCelebScore: Number
+});
+
 const celebimageSchema = new mongoose.Schema({
     person: String,
     birthYear: Number,
@@ -47,7 +53,17 @@ app.get('/', function(req, res){
 // sent in the body of the request. The function calls checkUser() to see if
 // the user exists in the database. If the user exists then the function 
 app.get('/login/user', function(req, res){
-
+  let username = req.body.username;
+  let password = req.body.password;
+  let userExists = checkUser(username, password);
+  if(userExists){
+    let cookie = createCookie(username);
+    res.cookie('user', cookie);
+    res.send("success");
+  }
+  else{
+    res.send("failure");
+  }
 });
 
 
