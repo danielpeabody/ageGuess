@@ -11,7 +11,8 @@ window.onload = function(){
         if(event.keyCode == 13){
             let guess = document.getElementById('guessInput').value;
             let filename = document.getElementById('celebPic').alt;
-            let data = {filename: filename, guess: guess};
+            let score = document.getElementById('scorenumber').innerText;
+            let data = {filename: filename, guess: guess, score: score};
             fetch('/check/guess', {
                 method: 'POST',
                 headers: {
