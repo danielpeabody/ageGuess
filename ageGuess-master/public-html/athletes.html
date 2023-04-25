@@ -32,9 +32,11 @@
         </div>
 
         <div class="guessArea">
-            <button type="submit" class="button">Start Guessing</button>
+          <p id="curScore">Current Score: <span id="scorenumber">0</span></p>
+          <input type="text" class="guess" id="guessInput" placeholder="Guess Age" onkeydown="checkGuess(event)">
             <img src="images\lebron.jpg" alt="">
-            <input type="text" class="guess" placeholder="Guess Age">
+            <p id="celebName">Lebron James</p>
+            <p id="dateTaken">2022</p>
         </div>
 </body>
 </html>
