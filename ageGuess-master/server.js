@@ -131,12 +131,17 @@ app.get('/get/image', function(req, res){
 guess passed in against the age in the database*/
 app.post('/check/guess', function(req, res){
   let filename = req.body.filename;
-  let guess = req.body.guess;
+  let guess = parseInt(req.body.guess);
   let image = celebImage.findOne({filename: filename}).exec();
   image.then(function(doc){
     const age = doc.datePhotoTaken - doc.birthYear;
-    if(parseInt(guess) == age){
+    console.log('this is the age: ' + age);
+    console.log('this is the guess:' + guess);
+    if(guess == age){
       res.end("correct");
+    }
+    else if((age - 5) <= guess && guess <= (age + 5)){
+      res.end("close");
     }
     else{
       res.end("incorrect");

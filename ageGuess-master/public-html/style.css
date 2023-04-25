@@ -289,3 +289,15 @@ tr:hover {
     transform: translate3d(4px, 0, 0);
   }
 }
+
+/*Create a slow yellow flash for a second for the class close*/
+.close {
+  animation: yflash 1s;
+}
+
+@keyframes yflash {
+  10%, 90% {
+    background-color: yellow;
+    transform: translate3d(-1px, 0, 0);
+  }
+}
