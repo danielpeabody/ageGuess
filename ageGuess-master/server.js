@@ -35,6 +35,8 @@ const celebimageSchema = new mongoose.Schema({
 });
 
 const celebImage = mongoose.model('celebImage', celebimageSchema);
+const users  = mongoose.model('user', userSchema);
+
 
 app.use(express.static(path.join(__dirname, '/public-html')));
 
@@ -52,11 +54,12 @@ app.get('/', function(req, res){
 // This app.get(/login/user) logs a user in based on the username and password
 // sent in the body of the request. The function calls checkUser() to see if
 // the user exists in the database. If the user exists then the function 
-app.get('/login/user', function(req, res){
+
+app.post('/account/login/', async function(req, res){
   let username = req.body.username;
   let password = req.body.password;
-  let userExists = checkUser(username, password);
-  if(userExists){
+  let curUser = users.find({username: username, password: password}).exec();
+  if((await curUser).length > 0){
     let cookie = createCookie(username);
     res.cookie('user', cookie);
     res.send("success");
@@ -66,21 +69,31 @@ app.get('/login/user', function(req, res){
   }
 });
 
+app.get('/account/create/:username/:password', (req, res) => {
+  console.log("account")
+  let p1 = users.find({username: req.params.username}).exec();
+  p1.then( (results) => { 
+    if (results.length > 0) {
+      res.end('That username is already taken.');
+    } else {
 
-function checkUser(username, password){
-/*This function checks to see if a user exists in mongodb database and
-returns true or false if it is found*/
-  let curUser = Users.find({username: username, password: password}).exec();
-  curUser.then(function(docs){
-    if(docs.length > 0){
-      return true;
-    }
-    else{
-      return false;
+      var newUser = new users({ 
+        username: req.params.username,
+        password: req.params.password
+      });
+      newUser.save().then( (doc) => { 
+          res.end('Created new account!');
+        }).catch( (err) => { 
+          console.log(err);
+          res.end('Failed to create new account.');
+        });
     }
   });
+  p1.catch( (error) => {
+    res.end('Failed to create new account.');
+  });
+});
 
-}
 
 function saltAndHash(password){
 /*This function takes in the passed in password then salts and hashes it and returns
