@@ -4,12 +4,12 @@ from bs4 import BeautifulSoup
 import time
 
 
-with open('/Users/rohan/OneDrive/Desktop/CS_Projects/finalProj/wikiLinks.txt', 'r') as file:
+with open('Users/rohanomalley/Desktop/CS_projects_work/ageGuess/ageGuess-master/wikipics/wikiLinks.txt', 'r') as file:
     lines = file.readlines()
 
 
 
-path_to_folder = '/Users/rohan/OneDrive/Documents/AAwikiphotos'
+path_to_folder = '"Users/rohanomalley/Desktop/CS_projects_work/AAAwikiphotos"'
 
 for wikilink in lines:
      time.sleep(1)
