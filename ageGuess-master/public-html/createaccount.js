@@ -1,7 +1,8 @@
 
 let createbutton = document.getElementById("createbutton")
-createbutton.addEventListener("click",(event) => {
-    console.log('click')
+createbutton.addEventListener("submit",(event) => {
+    event.preventDefault;
+    console.log('click');
     createAccount();
 })
 function createAccount() {
