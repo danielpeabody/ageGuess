@@ -2,8 +2,9 @@ console.log("login page")
 
 
 let loginbutton = document.getElementById("loginbutton")
-loginbutton.addEventListener("click",(event) => {
-    console.log('click')
+loginbutton.addEventListener("submit",(event) => {
+    event.preventDefault();
+    console.log('click');
     login();
 })
 
