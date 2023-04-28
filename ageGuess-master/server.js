@@ -34,7 +34,16 @@ const celebimageSchema = new mongoose.Schema({
     data: Buffer,
 });
 
+const athleteimageSchema = new mongoose.Schema({
+  person: String,
+  birthYear: Number,
+  datePhotoTaken: Number,
+  filename: String,
+  data: Buffer,
+});
+
 const celebImage = mongoose.model('celebImage', celebimageSchema);
+const athleteImage = mongoose.model('athleteImage', athleteimageSchema);
 const users  = mongoose.model('user', userSchema);
 
 
@@ -120,8 +129,17 @@ function createCookie(username){
 
 /*This function gets a random image from the mongoDB database collection called
 Images. Then it send the image back to the client*/
-app.get('/get/image', function(req, res){
-  let image = celebImage.aggregate([{ $sample: { size: 1 } }]);
+app.get('/get/image/:mode', function(req, res){
+  let image = null;
+  if(req.params.mode == "celeb"){
+    image = celebImage.aggregate([{ $sample: { size: 1 } }]);
+  }
+  else if(req.params.mode == "athlete"){
+    image = athleteImage.aggregate([{ $sample: { size: 1 } }]);
+  }
+  else{
+    image = communityImage.aggregate([{ $sample: { size: 1 } }]);
+  }
   image.then(function(docs){
     console.log(docs[0].birthYear, docs[0].datePhotoTaken);
     const data = {

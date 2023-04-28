@@ -20,14 +20,14 @@ app.use(cookieParser());
 
 mongoose.set('strictQuery', false);
 
-const mongoDB = 'mongodb+srv://doadmin:7wIg2qn46D31z8r9@finalproj-beb76a02.mongo.ondigitalocean.com/admin?tls=true&authSource=admin';
+const mongoDB = 'mongodb+srv://doadmin:8IVM69G1KCtq4325@finalproj-beb76a02.mongo.ondigitalocean.com/admin?tls=true&authSource=admin&replicaSet=finalproj';
 
 main().catch(err => console.log(err));
 async function main() {
   await mongoose.connect(mongoDB);
 }
 
-const celebimageSchema = new mongoose.Schema({
+const athleteSchema = new mongoose.Schema({
     person: String,
     birthYear: Number,
     datePhotoTaken: Number,
@@ -35,9 +35,9 @@ const celebimageSchema = new mongoose.Schema({
     data: Buffer,
   });
   
-  const celebImage = mongoose.model('celebImage', celebimageSchema);
+  const athleteImage = mongoose.model('athleteImage', athleteSchema);
   
-  const folderPath = "/Users/rohan/OneDrive/Documents/AAwikiphotos";
+  const folderPath = "C:/Users/rohanomalley/Desktop/CS_projects_work/ageGuess/ageGuess-master/wikipics/wikiphotos";
   
   fs.readdir(folderPath, (err, files) => {
     if (err) throw err;
@@ -50,7 +50,7 @@ const celebimageSchema = new mongoose.Schema({
 
         let fileArr = file.split('-');
 
-        const image = new celebImage({
+        const image = new athleteImage({
           person: fileArr[0],
           birthYear: parseInt(fileArr[1]),
           datePhotoTaken: parseInt(fileArr[2]),
