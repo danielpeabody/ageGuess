@@ -301,3 +301,16 @@ tr:hover {
     transform: translate3d(-1px, 0, 0);
   }
 }
+
+.gameSection {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.uploadPhotoArea{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

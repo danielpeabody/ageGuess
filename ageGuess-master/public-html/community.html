@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ageGuess</title>
     <link rel="stylesheet" href="style.css">
-
+    <script src="communitygame.js"></script>
 </head>
 <body>
     <div class="nav">
@@ -30,13 +30,21 @@
             <a href="account.html">Account</a>
           </div>
         </div>
-
-        <div class="guessArea">
-          <p id="curScore">Current Score: <span id="scorenumber">0</span></p>
-          <input type="text" class="guess" id="guessInput" placeholder="Guess Age" onkeydown="checkGuess(event)">
-            <img src="images\bigben.jpg" alt="">
-            <p id="celebName">Big Ben</p>
-            <p id="dateTaken">2020</p>
+        <div class="gameSection">
+          <div class="uploadPhotoArea">
+            <input type="file" id="imageFile" name="image" accept="image/*">
+            <input type="text" id="namePerson" placeholder="Name of Person in Photo">
+            <input type="number" id="ageInPhoto" placeholder="Age in Photo Uploaded">
+            <input type="number" id="datePhotoTaken" placeholder="Year Photo Taken">
+            <button type="button" name="button" onclick="uploadPhoto()">Upload Photo</button>
+          </div>
+          <div class="guessArea">
+            <p id="curScore">Current Score: <span id="scorenumber">0</span></p>
+            <input type="text" class="guess" id="guessInput" placeholder="Guess Age" onkeydown="checkGuess(event)">
+              <img src="" alt="" id="celebPic">
+              <p id="celebName"></p>
+              <p id="dateTaken"></p>
+          </div>
         </div>
 </body>
 </html>

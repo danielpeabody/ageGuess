@@ -42,8 +42,17 @@ const athleteimageSchema = new mongoose.Schema({
   data: Buffer,
 });
 
+const communityimageSchema = new mongoose.Schema({
+  person: String,
+  age: Number,
+  datePhotoTaken: Number,
+  filename: String,
+  data: String,
+});
+
 const celebImage = mongoose.model('celebImage', celebimageSchema);
 const athleteImage = mongoose.model('athleteImage', athleteimageSchema);
+const communityImage = mongoose.model('communityImage', communityimageSchema);
 const users  = mongoose.model('user', userSchema);
 
 
@@ -141,7 +150,7 @@ app.get('/get/image/:mode', function(req, res){
     image = communityImage.aggregate([{ $sample: { size: 1 } }]);
   }
   image.then(function(docs){
-    console.log(docs[0].birthYear, docs[0].datePhotoTaken);
+    
     const data = {
       filename: docs[0].filename,
       pic: docs[0].data,
@@ -157,6 +166,42 @@ app.get('/get/image/:mode', function(req, res){
     // res.end(docs[rand].data);
   });
 })
+
+app.post('/upload/image', function(req, res){
+  console.log(req.body);
+  data = req.body;
+  let file = data.file;
+  let name = data.name;
+  let ageInPhoto = data.ageInPhoto;
+  console.log(ageInPhoto);
+  let datePhotoTaken = data.datePhotoTaken;
+  // upload image to mongoDB
+  let newImage = new communityImage({
+    person: name,
+    age: ageInPhoto,
+    datePhotoTaken: datePhotoTaken,
+    filename: genRandStr(),
+    data:file
+  });
+  newImage.save().then(function(doc){
+    res.end("success");
+  }).catch(function(err){
+    res.end("fail");
+  });
+});
+
+function genRandStr() {
+  let result = "";
+  const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  const charsLen = chars.length;
+  
+  for (let i = 0; i < 10; i++) {
+    result += chars.charAt(Math.floor(Math.random() * charsLen));
+  }
+  
+  return result;
+}
+
 
 /*This function searches for the image by the object id passed in then it checks the users
 guess passed in against the age in the database*/
