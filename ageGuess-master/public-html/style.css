@@ -1,8 +1,13 @@
+@font-face{
+    font-family: 'Inter';
+    src: url('ageGuess-master/public-html/Inter/static/Inter-Medium.ttf') format('truetype');
+}
+
 body {
     background-image: linear-gradient(92.88deg, #5983e4 9.16%, #355fae 43.89%, #2146b4 64.72%);
     margin: 0;
     padding: 0;
-    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif
+    font-family:'Inter', sans-serif;
 }
 
 .nav {
