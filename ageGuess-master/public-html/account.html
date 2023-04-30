@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Display Cookie Value</title>
+    <link rel="stylesheet" href="account.css">
+  </head>
+  <body>
+    <div class="nav">
+        <input type="checkbox" id="nav-check">
+        <div class="nav-header">
+          <div class="nav-title"><p>ageGuess 🤔</p>
+          </div>
+        </div>
+        <div class="nav-btn">
+          <label for="nav-check">
+            <span></span>
+            <span></span>
+            <span></span>
+          </label>
+        </div>
+    <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="gamemodes.html">Game Modes</a>
+        <a href="leaderboard.html">Leaderboard</a>
+        <a href="account.html">Account</a>
+      </div>
+    </div>
+    <div class="account">
+        <h1>Your Account</h1>
+        <h2 id="username"></h2>
+        <h2 id="celebscore">Celebrity Highscore: 50</h2>
+        <h2 id="athletescore">Athlete Highscore: 60</h2>
+        <h2 id="comunscore">Community Highscore: 45</h2>
+    </div>
+    <script>
+      // Get the value of the "myCookie" cookie
+      var myCookie = getCookie("user");
+
+      // Insert the cookie value into the HTML of the page
+      document.getElementById("username").innerHTML = "Username: " + myCookie;
+
+      // Helper function to get a cookie value by name
+      function getCookie(name) {
+        var value = document.cookie;
+        var parts = value.replace("%"," ").replace("="," ").split(" ");
+        return parts[1]
+      }
+    </script>
+  </body>
+</html>

@@ -125,7 +125,7 @@ the new salted and hashed password*/
  Then it sets a expiration date for the cookie that is 20 minutes from the current time
  then returns the cookie*/
 function createCookie(username){
-  let cookie = username + Date.now();
+  let cookie = username;  
   let date = new Date();
   date.setTime(date.getTime() + (20 * 60 * 1000));
   let expires = "expires=" + date.toUTCString();
