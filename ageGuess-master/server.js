@@ -5,6 +5,9 @@ const app = express();
 var qs = require('querystring');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
+const { copyFileSync } = require("fs");
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 const hostname = '127.0.0.1';
 const port = 3000;
@@ -76,15 +79,17 @@ app.get('/', function(req, res){
 app.post('/account/login/', async function(req, res){
   let username = req.body.username;
   let password = req.body.password;
-  let curUser = users.find({username: username, password: password}).exec();
-  if((await curUser).length > 0){
-    let cookie = createCookie(username);
-    res.cookie('user', cookie);
-    res.send("success");
-  }
-  else{
-    res.send("failure");
-  }
+  let curUser = users.find({username: username}).exec();
+  curUser.then((result) =>{
+    if((bcrypt.compareSync(password,result[0].password))){
+      let cookie = createCookie(username);
+      res.cookie('user', cookie);
+      res.send("success");
+    }
+    else{
+      res.send("failure");
+    }
+  })
 });
 
 app.get('/account/create/:username/:password', (req, res) => {
@@ -94,10 +99,10 @@ app.get('/account/create/:username/:password', (req, res) => {
     if (results.length > 0) {
       res.end('That username is already taken.');
     } else {
-
+      let hashpass = saltAndHash(req.params.password)
       var newUser = new users({ 
         username: req.params.username,
-        password: req.params.password
+        password: hashpass
       });
       newUser.save().then( (doc) => { 
           res.end('Created new account!');
@@ -120,6 +125,7 @@ the new salted and hashed password*/
   let hash = bcrypt.hashSync(password, salt);
   return hash;
 }
+
 
 /*This function creates a cookie based on the currrent user.
  Then it sets a expiration date for the cookie that is 20 minutes from the current time
