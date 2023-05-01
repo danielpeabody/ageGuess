@@ -71,7 +71,7 @@ window.onload = function(){
                         setClass('correct');
                         getNewImage();
                         updateScore();
-                        document.getElementById('curScore').innerText = "Current Score: " + curScorev;
+                        document.getElementById('scorenumber').innerText = curScorev;
                     }
                     else if(data == "close"){
                         setClass('close');
@@ -79,7 +79,7 @@ window.onload = function(){
                     else{
                         setClass('incorrect');
                         curScorev = 0;
-                        document.getElementById('curScore').innerText = "Current Score: " + curScorev;
+                        document.getElementById('scorenumber').innerText = curScorev;
                     }
                 });
             });
