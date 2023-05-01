@@ -93,7 +93,6 @@ app.post('/account/login/', async function(req, res){
 });
 
 app.get('/account/create/:username/:password', (req, res) => {
-  console.log("account")
   let p1 = users.find({username: req.params.username}).exec();
   p1.then( (results) => { 
     if (results.length > 0) {
@@ -165,16 +164,10 @@ app.get('/get/image/:mode', function(req, res){
     }
 
     res.end(JSON.stringify(data));
-    // length = docs.length;
-    // let rand = Math.floor(Math.random() * length);
-    // console.log(docs[rand].person);
-    // res.set('Content-Type', 'application/octet-stream');
-    // res.end(docs[rand].data);
   });
 })
 
 app.post('/upload/image', function(req, res){
-  console.log(req.body);
   data = req.body;
   let file = data.file;
   let name = data.name;
@@ -211,22 +204,40 @@ function genRandStr() {
 
 /*This function searches for the image by the object id passed in then it checks the users
 guess passed in against the age in the database*/
-app.post('/check/guess', function(req, res){
+app.post('/check/guess/:mode', function(req, res){
   let filename = req.body.filename;
   let guess = parseInt(req.body.guess);
   let curScore = parseInt(req.body.score);
-  let image = celebImage.findOne({filename: filename}).exec();
-  image.then(function(doc){
-    const age = doc.datePhotoTaken - doc.birthYear;
-    if(guess == age){
+  let image;
+  if (req.params.mode == "celeb") {
+    image = celebImage.findOne({filename: filename}).exec();
+  }
+  else if (req.params.mode == "athlete") {
+    image = athleteImage.findOne({ filename: filename }).exec();
+  }
+  else {
+    image = communityImage.findOne({ filename: filename }).exec();
+  }
+  image.then(function (doc) {
+    let age;
+    if (req.params.mode == "comm") {
+      age = parseInt(doc.age);
+    }
+    else {
+      age = parseInt(doc.datePhotoTaken - doc.birthYear);
+    }
+    console.log(age, guess);
+    if (guess == age) {
+      console.log("correct");
       data = {checkedGuess: "correct", curScore: curScore + 1};
       res.end(JSON.stringify(data));
     }
-    else if((age - 5) <= guess && guess <= (age + 5)){
-      res.end("close");
+    else if ((age - 5) <= guess && guess <= (age + 5)) {
+      data = { checkedGuess: "close"};
+      res.end(JSON.stringify(data));
     }
     else{
-      res.end("incorrect");
+      res.end(JSON.stringify({ checkedGuess: "incorrect" }));
     }
   });
 });

@@ -57,7 +57,7 @@ window.onload = function(){
             let filename = document.getElementById('celebPic').alt;
             let score = document.getElementById('scorenumber').innerText;
             let data = {filename: filename, guess: guess, score: score};
-            fetch('/check/guess', {
+            fetch('/check/guess/comm', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

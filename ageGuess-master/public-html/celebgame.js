@@ -13,7 +13,7 @@ window.onload = function(){
             let filename = document.getElementById('celebPic').alt;
             let score = document.getElementById('scorenumber').innerText;
             let data = {filename: filename, guess: guess, score: score};
-            fetch('/check/guess', {
+            fetch('/check/guess/celeb', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -50,7 +50,7 @@ window.onload = function(){
     }
 
     function getNewImage(){
-        fetch('/get/image')
+        fetch('/get/image/celeb')
         .then(function(response){
             response.json().then(function(data){
                 const dataUrl = `data:image/jpeg;base64,${data.pic.toString('base64')}`;
