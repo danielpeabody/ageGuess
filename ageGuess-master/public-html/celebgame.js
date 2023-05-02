@@ -2,13 +2,41 @@
 window.onload = function(){
     getNewImage();
 }
-
+    let guessesLeft = 25;
     /*This function checkGuess(event) checks the event code to see if it is the enter key.
     then it checks to see if the guess is correct by sending a request using fetch to the server with
     the images id and the users guess. Then it checks the response from the server to see
     if the guess was correct or not. If it was correct it displays a message saying correct*/
     function checkGuess(event){
         if(event.keyCode == 13){
+            if (guessesLeft == 0){
+                alert("You have no guesses left. Bringing up a new Image.");
+                getNewImage();
+                guessesLeft = 25;
+                document.getElementById('guessInput').value = "";
+                fetch('/save/score/celeb', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({score: curScorev})
+                        })
+                        .then(function(response){
+                            console.log(response);
+                            response.text().then(function(data){
+                                console.log(data);
+                                if(data == "success"){
+                                    console.log("success");
+                                }
+                                else{
+                                    console.log("fail");
+                                }
+                            });
+                        });
+                curScorev = 0;
+                document.getElementById('scorenumber').innerText = 0;
+                return;
+            }
             let guess = document.getElementById('guessInput').value;
             let filename = document.getElementById('celebPic').alt;
             let score = document.getElementById('scorenumber').innerText;
@@ -22,7 +50,7 @@ window.onload = function(){
             })
             .then(function(response){
                 console.log(response);
-                response.text().then(function(data){
+                response.json().then(function(data){
                     if(data.checkedGuess == "correct"){
                         setClass('correct');
                         getNewImage();
@@ -35,6 +63,7 @@ window.onload = function(){
                     else{
                         setClass('incorrect');
                         curScorev = 0;
+                        guessesLeft -= 1;
                         document.getElementById('scorenumber').innerText = curScorev;
                     }
                 });

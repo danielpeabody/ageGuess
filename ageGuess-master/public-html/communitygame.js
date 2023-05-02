@@ -66,14 +66,14 @@ window.onload = function(){
             })
             .then(function(response){
                 console.log(response);
-                response.text().then(function(data){
-                    if(data == "correct"){
+                response.json().then(function(data){
+                    if(data.checkedGuess == "correct"){
                         setClass('correct');
                         getNewImage();
                         updateScore();
                         document.getElementById('scorenumber').innerText = curScorev;
                     }
-                    else if(data == "close"){
+                    else if(data.checkedGuess == "close"){
                         setClass('close');
                     }
                     else{

@@ -26,7 +26,9 @@ async function main() {
 const userSchema = new mongoose.Schema({
     username: String,
     password: String,
-    topCelebScore: Number
+    topCelebScore: Number,
+    topAthleteScore: Number,
+    topCommunityScore: Number,
 });
 
 const celebimageSchema = new mongoose.Schema({
@@ -101,7 +103,10 @@ app.get('/account/create/:username/:password', (req, res) => {
       let hashpass = saltAndHash(req.params.password)
       var newUser = new users({ 
         username: req.params.username,
-        password: hashpass
+        password: hashpass,
+        topCelebScore: 0,
+        topAthleteScore: 0,
+        topCommunityScore: 0
       });
       newUser.save().then( (doc) => { 
           res.end('Created new account!');
@@ -202,10 +207,43 @@ function genRandStr() {
 }
 
 
+app.post('/save/score/:mode', function(req, res){
+  if (req.cookies.user == undefined) {
+    console.log("failure");
+    return;
+  }
+  let cookieArr = req.cookies.user.split(';');
+  let username = cookieArr[0];
+  let score = parseInt(req.body.score);
+  let curUser = users.find({username: username}).exec();
+  curUser.then((result) =>{
+    if(req.params.mode == "celeb"){
+      if(result[0].topCelebScore < score){
+        users.updateOne({username: username}, {topCelebScore: score}).exec();
+      }
+    }
+    else if(req.params.mode == "athlete"){
+      if(result[0].topAthleteScore < score){
+        users.updateOne({username: username}, {topAthleteScore: score}).exec();
+      }
+    }
+    else{
+      if(result[0].topCommunityScore < score){
+        users.updateOne({username: username}, {topCommunityScore: score}).exec();
+      }
+    }
+  });
+});
+
 /*This function searches for the image by the object id passed in then it checks the users
 guess passed in against the age in the database*/
 app.post('/check/guess/:mode', function(req, res){
+  
+  let cookieArr = req.cookies.user.split(';');
+  let username = cookieArr[0];
+
   let filename = req.body.filename;
+
   let guess = parseInt(req.body.guess);
   let curScore = parseInt(req.body.score);
   let image;
