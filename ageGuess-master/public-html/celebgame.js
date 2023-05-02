@@ -50,7 +50,7 @@ window.onload = function(){
     }
 
     function getNewImage(){
-        fetch('/get/image')
+        fetch('/get/image/celeb')
         .then(function(response){
             response.json().then(function(data){
                 const dataUrl = `data:image/jpeg;base64,${data.pic.toString('base64')}`;
