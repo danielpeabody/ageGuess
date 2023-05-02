@@ -83,10 +83,15 @@ app.post('/account/login/', async function(req, res){
   let password = req.body.password;
   let curUser = users.find({username: username}).exec();
   curUser.then((result) =>{
-    if((bcrypt.compareSync(password,result[0].password))){
-      let cookie = createCookie(username);
-      res.cookie('user', cookie);
-      res.send("success");
+    if(result.length > 0){
+      if((bcrypt.compareSync(password,result[0].password))){
+        let cookie = createCookie(username);
+        res.cookie('user', cookie);
+        res.send("success");
+      }
+      else{
+        res.send("failure")
+      }
     }
     else{
       res.send("failure");
