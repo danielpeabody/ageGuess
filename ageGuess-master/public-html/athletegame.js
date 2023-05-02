@@ -11,9 +11,9 @@ window.onload = function(){
         if(event.keyCode == 13){
             let guess = document.getElementById('guessInput').value;
             let filename = document.getElementById('celebPic').alt;
-            let score = document.getElementById('scorenumber').innerText;
+            let score = document.getElementById('scorenumber').textContent;
             let data = {filename: filename, guess: guess, score: score};
-            fetch('/check/guess', {
+            fetch('/check/guess/athlete', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -22,20 +22,20 @@ window.onload = function(){
             })
             .then(function(response){
                 console.log(response);
-                response.text().then(function(data){
-                    if(data == "correct"){
+                response.json().then(function(data){
+                    if(data.checkedGuess == "correct"){
                         setClass('correct');
                         getNewImage();
                         updateScore();
-                        document.getElementById('curScore').innerText = "Current Score: " + curScorev;
+                        document.getElementById('scorenumber').innerText = curScorev;
                     }
-                    else if(data == "close"){
+                    else if(data.checkedGuess == "close"){
                         setClass('close');
                     }
                     else{
                         setClass('incorrect');
                         curScorev = 0;
-                        document.getElementById('curScore').innerText = "Current Score: " + curScorev;
+                        document.getElementById('scorenumber').innerText = curScorev;
                     }
                 });
             });

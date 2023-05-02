@@ -13,7 +13,7 @@ window.onload = function(){
             let filename = document.getElementById('celebPic').alt;
             let score = document.getElementById('scorenumber').innerText;
             let data = {filename: filename, guess: guess, score: score};
-            fetch('/check/guess', {
+            fetch('/check/guess/celeb', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -27,7 +27,7 @@ window.onload = function(){
                         setClass('correct');
                         getNewImage();
                         updateScore();
-                        document.getElementById('curScore').innerText = "Current Score: " + curScorev;
+                        document.getElementById('scorenumber').innerText = curScorev;
                     }
                     else if(data == "close"){
                         setClass('close');
@@ -35,7 +35,7 @@ window.onload = function(){
                     else{
                         setClass('incorrect');
                         curScorev = 0;
-                        document.getElementById('curScore').innerText = "Current Score: " + curScorev;
+                        document.getElementById('scorenumber').innerText = curScorev;
                     }
                 });
             });
