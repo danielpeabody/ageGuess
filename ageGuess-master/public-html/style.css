@@ -1,3 +1,13 @@
+/* 
+Project ageGuess
+CSC 337
+Developers: Rohan O'Malley,Daniel Peabody
+
+This file is the main style sheet for the application. This sheet styles all of the game modes and rules pages.
+Classes are kept consistant on those pages to allow for steamlined style changes. It uses the same navigation,
+fonts, and background color found throughout the site.
+*/
+
 @font-face{
     font-family: 'Inter';
     src: url('ageGuess-master/public-html/Inter/static/Inter-Medium.ttf') format('truetype');

@@ -1,3 +1,13 @@
+/* 
+Project ageGuess
+CSC 337
+Developers: Rohan O'Malley,Daniel Peabody
+
+This file is the style sheet for the createaccount.html page. It uses 2 fonts: Inter, and Happy
+and uses the same navigation found within the site. Most of the unique style for this page is 
+found within the form class.
+*/
+
 * {
 	margin: 0;
 	padding: 0;
