@@ -222,6 +222,8 @@ app.post('/save/score/:mode', function(req, res){
   let score = parseInt(req.body.score);
   let curUser = users.find({username: username}).exec();
   curUser.then((result) =>{
+    console.log(result[0])
+    console.log('made it');
     if(req.params.mode == "celeb"){
       if(result[0].topCelebScore < score){
         users.updateOne({username: username}, {topCelebScore: score}).exec();
@@ -243,12 +245,7 @@ app.post('/save/score/:mode', function(req, res){
 /*This function searches for the image by the object id passed in then it checks the users
 guess passed in against the age in the database*/
 app.post('/check/guess/:mode', function(req, res){
-  
-  let cookieArr = req.cookies.user.split(';');
-  let username = cookieArr[0];
-
   let filename = req.body.filename;
-
   let guess = parseInt(req.body.guess);
   let curScore = parseInt(req.body.score);
   let image;
@@ -282,6 +279,34 @@ app.post('/check/guess/:mode', function(req, res){
     else{
       res.end(JSON.stringify({ checkedGuess: "incorrect" }));
     }
+  });
+});
+
+app.get('/get/leaderboard/:mode', function(req, res){
+  let leaderboard;
+  if(req.params.mode == "celeb"){
+    leaderboard = users.find({}).sort({topCelebScore: -1}).limit(10).exec();
+  }
+  else if(req.params.mode == "athlete"){
+    leaderboard = users.find({}).sort({ topAthleteScore: -1 }).limit(10).exec();
+  }
+  else{
+    leaderboard = users.find({}).sort({ topCommunityScore: -1 }).limit(10).exec();
+  }
+  leaderboard.then(function(docs){
+    retArr = [];
+    for (doc of docs){
+      if(req.params.mode == "celeb"){
+        retArr.push({username: doc.username, score: doc.topCelebScore});
+      }
+      else if(req.params.mode == "athlete"){
+        retArr.push({ username: doc.username, score: doc.topAthleteScore });
+      }
+      else{
+        retArr.push({ username: doc.username, score: doc.topCommunityScore });
+      }
+    }
+    res.end(JSON.stringify(retArr));
   });
 });
 

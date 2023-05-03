@@ -10,29 +10,17 @@ window.onload = function(){
     function checkGuess(event){
         if(event.keyCode == 13){
             if (guessesLeft == 0){
-                alert("You have no guesses left. Bringing up a new Image.");
-                getNewImage();
-                guessesLeft = 25;
-                document.getElementById('guessInput').value = "";
                 fetch('/save/score/celeb', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
                         },
                         body: JSON.stringify({score: curScorev})
-                        })
-                        .then(function(response){
-                            console.log(response);
-                            response.text().then(function(data){
-                                console.log(data);
-                                if(data == "success"){
-                                    console.log("success");
-                                }
-                                else{
-                                    console.log("fail");
-                                }
-                            });
                         });
+                alert("You have no guesses left. Bringing up a new Image.");
+                getNewImage();
+                guessesLeft = 25;
+                document.getElementById('guessInput').value = "";
                 curScorev = 0;
                 document.getElementById('scorenumber').innerText = 0;
                 return;
@@ -64,6 +52,7 @@ window.onload = function(){
                         setClass('incorrect');
                         curScorev = 0;
                         guessesLeft -= 1;
+                        document.getElementById('guessNumber').innerText = guessesLeft;
                         document.getElementById('scorenumber').innerText = curScorev;
                     }
                 });

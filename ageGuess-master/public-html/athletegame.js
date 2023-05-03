@@ -2,13 +2,29 @@
 window.onload = function(){
     getNewImage();
 }
-
+    let guessesLeft = 25;
     /*This function checkGuess(event) checks the event code to see if it is the enter key.
     then it checks to see if the guess is correct by sending a request using fetch to the server with
     the images id and the users guess. Then it checks the response from the server to see
     if the guess was correct or not. If it was correct it displays a message saying correct*/
     function checkGuess(event){
         if(event.keyCode == 13){
+            if (guessesLeft == 0){
+                fetch('/save/score/athlete', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({score: curScorev})
+                        });
+                alert("You have no guesses left. Bringing up a new Image.");
+                getNewImage();
+                guessesLeft = 25;
+                document.getElementById('guessInput').value = "";
+                curScorev = 0;
+                document.getElementById('scorenumber').innerText = 0;
+                return;
+            }
             let guess = document.getElementById('guessInput').value;
             let filename = document.getElementById('celebPic').alt;
             let score = document.getElementById('scorenumber').textContent;
@@ -35,6 +51,8 @@ window.onload = function(){
                     else{
                         setClass('incorrect');
                         curScorev = 0;
+                        guessesLeft -= 1;
+                        document.getElementById('guessNumber').innerText = guessesLeft;
                         document.getElementById('scorenumber').innerText = curScorev;
                     }
                 });
