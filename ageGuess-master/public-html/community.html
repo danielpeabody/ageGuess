@@ -30,22 +30,26 @@
             <a href="account.html">Account</a>
           </div>
         </div>
-        <div class="gameSection">
-          <div class="uploadPhotoArea">
-            <input type="file" id="imageFile" name="image" accept="image/*">
-            <input type="text" id="namePerson" placeholder="Name of Person in Photo">
-            <input type="number" id="ageInPhoto" placeholder="Age in Photo Uploaded">
-            <input type="number" id="datePhotoTaken" placeholder="Year Photo Taken">
-            <button type="button" name="button" onclick="uploadPhoto()">Upload Photo</button>
-          </div>
           <div class="guessArea">
-            <p id="curScore">Current Score: <span id="scorenumber">0</span></p>
-            <p id="guessesLeft">Guesses Left: <span id="guessNumber">25</span></p>
-            <input type="text" class="guess" id="guessInput" placeholder="Guess Age" onkeydown="checkGuess(event)">
+            <div class="splitleft">
+              <p class="tag">Community</p>
               <img src="" alt="" id="celebPic">
+              <input type="text" class="guess" id="guessInput" placeholder="Guess Age" onkeydown="checkGuess(event)">
               <p id="celebName"></p>
               <p id="dateTaken"></p>
+            </div>
+            <div class="splitright">
+              <p id="curScore">Current Score: <span id="scorenumber">0</span></p>
+              <p id="guessesLeft">Guesses Left: <span id="guessNumber">25</span></p>
+              <div class="uploadPhotoArea">
+                <p>Community<br>Upload</p>
+                <input type="file" id="imageFile" name="image" accept="image/*">
+                <input type="text" id="namePerson" placeholder="Name of Person in Photo">
+                <input type="number" id="ageInPhoto" placeholder="Age in Photo Uploaded">
+                <input type="number" id="datePhotoTaken" placeholder="Year Photo Taken">
+                <button type="button" name="button" onclick="uploadPhoto()">Upload Photo</button>
+              </div>
+            </div>
           </div>
-        </div>
 </body>
 </html>

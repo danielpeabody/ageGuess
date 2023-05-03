@@ -151,6 +151,31 @@ function createCookie(username){
 
 //---------------------------------------------------------------------------------------
 
+
+
+
+app.get("/get/account",function(req,res) {
+  if (req.cookies.user == undefined) {
+    console.log("failure");
+    return;
+  }
+  let cookieArr = req.cookies.user.split(';');
+  let username = cookieArr[0];
+  let score = parseInt(req.body.score);
+  let curUser = users.find({username: username}).exec()
+  .then( (response) =>{
+    const user = {
+      username : response[0].username,
+      topCelebScore: response[0].topCelebScore,
+      topAthleteScore: response[0].topAthleteScore,
+      topCommunityScore: response[0].topCommunityScore
+
+    }
+    console.log(user)
+    res.end(JSON.stringify(user));
+  })
+
+})
 /*This function gets a random image from the mongoDB database collection called
 Images. Then it send the image back to the client*/
 app.get('/get/image/:mode', function(req, res){
