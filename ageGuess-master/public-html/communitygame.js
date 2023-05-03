@@ -107,7 +107,6 @@ window.onload = function(){
                     }
                     else{
                         setClass('incorrect');
-                        curScorev = 0;
                         guessesLeft -= 1;
                         document.getElementById('guessesLeft').innerText = guessesLeft;
                         document.getElementById('scorenumber').innerText = curScorev;
