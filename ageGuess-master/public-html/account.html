@@ -29,13 +29,16 @@
     <div class="account">
         <h1>Your Account</h1>
         <h2 id="username"></h2>
-        <h2 id="celebscore">Celebrity Highscore: 50</h2>
-        <h2 id="athletescore">Athlete Highscore: 60</h2>
-        <h2 id="comunscore">Community Highscore: 45</h2>
+        <h2 id="celebscore">Celebrity Highscore: 0</h2>
+        <h2 id="athletescore">Athlete Highscore: 0</h2>
+        <h2 id="comunscore">Community Highscore: 0</h2>
     </div>
     <script>
       // Get the value of the "myCookie" cookie
       var myCookie = getCookie("user");
+      if(myCookie == undefined){
+        myCookie = "No User Logged In"
+      }
 
       // Insert the cookie value into the HTML of the page
       document.getElementById("username").innerHTML = "Username: " + myCookie;
