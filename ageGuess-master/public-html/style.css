@@ -238,6 +238,25 @@ body {
   box-shadow: #13cf4f 0 0 0 5px, transparent 0 0 0 0;
 }
 
+#ready {
+  width: 20%;
+  min-width: 300px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+
+}
+
+
+#ready a {
+  text-decoration: none;
+}
+
+#ready a:visited{
+  text-decoration: none;
+  color: inherit;
+}
+
 
 /* Define styles for the table */
 .leaderboard {
