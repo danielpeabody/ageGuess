@@ -19,7 +19,7 @@ function createAccount() {
     let pw = document.getElementById('passwordCreate').value;
     let p = fetch('/account/create/' + us + '/' + pw);
     p.then((response) => {
-      window.location.href = "http://localhost:3000/login.html";
+      window.location.href = "login.html";
       return response.text();
     }).then((text) => { 
       alert(text);

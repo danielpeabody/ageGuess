@@ -28,8 +28,8 @@ fetch('/get/account')
 .then(function(response){
 response.json().then(function(data){
 document.getElementById("celebscore").innerHTML = "Celebrity Highscore: " + data.topCelebScore;
-document.getElementById("athletescore").innerHTML = "Athlete Highscore: " + data.topCelebScore;
-document.getElementById("comunscore").innerHTML = "Coummunity Highscore: " + data.topCelebScore;
+document.getElementById("athletescore").innerHTML = "Athlete Highscore: " + data.topAthleteScore;
+document.getElementById("comunscore").innerHTML = "Coummunity Highscore: " + data.topCommunityScore;
 })
 }
 )

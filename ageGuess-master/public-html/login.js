@@ -30,7 +30,7 @@ function login() {
     }).then((text) => { 
       if (text.startsWith('s')) {
         alert(text);
-        window.location.href = "http://localhost:3000/gamemodes.html";
+        window.location.href = "gamemodes.html";
       } else {
         alert('failed');
       }
