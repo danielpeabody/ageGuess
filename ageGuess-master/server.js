@@ -1,3 +1,18 @@
+/* 
+Project ageGuess
+CSC 337
+Developers: Rohan O'Malley,Daniel Peabody
+
+This file is the server for out project. It uses express to connect the static files with the correct
+host and port name. The server also uses mongoose to connect with a mongo db database. The cookie-parser
+module is also used to access cookies used in the project. There are 4 schemas used for the database; 
+user, celebimage, athleteimage, and communityimage. There are 5 get paths 4 post paths that all deal with either
+creating new instances of the schemas mentioned, or getting information from existing instances. The main function of 
+the server is allowing users to login/create an account, send image files to the gamemodes on the site, and checking
+if users made the correct guess. 
+*/
+
+
 const mongoose = require("mongoose");
 const express = require('express');
 const path = require('path');
