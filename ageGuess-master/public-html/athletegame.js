@@ -1,4 +1,13 @@
+/* 
+Project ageGuess
+CSC 337
+Developers: Rohan O'Malley,Daniel Peabody
 
+This file contains the logic for the athlete game mode. Each time the user makes a guess
+this file makes a request to the server to check if the guess was right. Depending on the outcome
+it takes a guess away from the user and adds to the score. Once the user is out of guesses the file
+restarts the game with a fresh set of guesses.
+*/
 window.onload = function(){
     getNewImage();
 }

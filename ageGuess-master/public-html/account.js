@@ -1,3 +1,13 @@
+/*
+Project ageGuess
+CSC 337
+Developers: Rohan O'Malley,Daniel Peabody
+
+This file contains the logic for the account.html page. Each time the page is loaded
+it gets the value stored as a cookie to see who the logged in user is. It then makes a
+request to the server to get the username and scores for the current user. 
+*/
+
 // Get the value of the "myCookie" cookie
 var myCookie = getCookie("user");
 if(myCookie == undefined){

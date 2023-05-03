@@ -1,4 +1,15 @@
+/* 
+Project ageGuess
+CSC 337
+Developers: Rohan O'Malley,Daniel Peabody
 
+This file contains the logic for the community game mode. Each time the user makes a guess
+this file makes a request to the server to check if the guess was right. Depending on the outcome
+it takes a guess away from the user and adds to the score. Once the user is out of guesses the file
+restarts the game with a fresh set of guesses. This game mode also allows for users to upload 
+an image to add to the community which is handled by this file. It sends the image file and information
+about the image to the server to be stored in the db.
+*/
 window.onload = function(){
     getNewImage();
 }
