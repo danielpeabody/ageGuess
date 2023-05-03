@@ -1,3 +1,12 @@
+/* 
+Project ageGuess
+CSC 337
+Developers: Rohan O'Malley,Daniel Peabody
+
+This file contains the logic for the community leaderboard. Each time the page is loaded it makes 
+a request to the server to find the top 10 scores for the community game mode. Then it loops through
+the high scores and adds them to the page for the user to see.
+*/
 window.onload = function(){
     fetch('/get/leaderboard/community')
     .then(function(response){
