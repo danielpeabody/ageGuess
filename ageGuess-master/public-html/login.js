@@ -1,5 +1,12 @@
-console.log("login page")
+/* 
+Project ageGuess
+CSC 337
+Developers: Rohan O'Malley,Daniel Peabody
 
+This file contains the logic for the logging in. The user enters the information on the form and then
+this file makes a request to the server to see if the username and password match and exist. If they do the 
+server creates a cookie for the user and redirects to the game modes page.
+*/
 
 let loginbutton = document.getElementById("loginbutton")
 loginbutton.addEventListener("submit",(event) => {
